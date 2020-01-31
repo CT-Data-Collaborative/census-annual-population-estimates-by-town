@@ -39,7 +39,8 @@ pop_est_CT_towns <- ddply(pop_est_CT_towns, "NAME", function(x) colSums(x[c("POP
                                                                             "POPESTIMATE2014",
                                                                             "POPESTIMATE2015",
                                                                             "POPESTIMATE2016",
-                                                                            "POPESTIMATE2017")]))
+                                                                            "POPESTIMATE2017",
+                                                                            "POPESTIMATE2018")]))
 
 #Merge in FIPS
 town_fips_dp_URL <- 'https://raw.githubusercontent.com/CT-Data-Collaborative/ct-town-list/master/datapackage.json'
@@ -49,7 +50,7 @@ fips <- (town_fips_dp$data[[1]])
 pop_est_CT_towns <- merge(pop_est_CT_towns, fips, by.x = "NAME", by.y = "Town", all.y = T)
 
 #Convert wide to long
-pop_est_CT_towns_long <- gather(pop_est_CT_towns, Year, Value, 2:9)
+pop_est_CT_towns_long <- gather(pop_est_CT_towns, Year, Value, 2:10)
 
 #Clean up year column
 pop_est_CT_towns_long$Year <- gsub("POPESTIMATE", "", pop_est_CT_towns_long$Year)
@@ -67,7 +68,7 @@ pop_est_CT_towns_long <- pop_est_CT_towns_long %>%
 # Write to File
 write.table(
   pop_est_CT_towns_long,
-  file.path(path_to_data, "census-population-by-town.csv"),
+  file.path(path_to_data, "census-population-by-town-2018.csv"),
   sep = ",",
   row.names = F
 )
