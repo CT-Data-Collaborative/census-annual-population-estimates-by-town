@@ -17,11 +17,11 @@
   "author":[{
     "name": "CTData Collaborative",
     "email": "info@ctdata.org",
-    "web": "http://ctdata.org"
+    "web": "https://ctdata.org"
   }],
   "contributor": [],
   "resources": [{
-    "path": "data/census-population-by-town-2018.csv",
+    "path": "data/census-population-by-town-2019.csv",
     "format": "csv",
     "schema": {
       "fields": [{
@@ -58,11 +58,11 @@
       }
     }
   ],
-  "last_modified": "01/31/2020",
+  "last_modified": "02/26/2021",
   "ckan_extras": {
     "full_description": {
       "ckan_name": "Full Description",
-      "value": "Census Annual Population Estimates by Town presents the 1-year population estimates per town, for a given year. This comprises of 12 months of collected data, as estimated by the Census Bureau. These data are best used when analyzing larger populations (typically greater than 65,000).",
+      "value": "Census Annual Population Estimates by Town presents the 1-year population estimates per town, for a given year. This comprises of 12 months of collected data, as estimated by the Census Bureau. These data are best used when analyzing larger populations (typically greater than 65,000). Town populations exclude boroughs, so when population estimates for 169 towns are added up, the sum may be smaller than the state's population estimate.",
       "type": "string"
     },
     "suppression": {
@@ -113,12 +113,12 @@
     },
     "years_in_catalog": {
       "ckan_name": "Years in Catalog",
-      "value": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"],
+      "value": ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
       "type": "array"
     },
     "latest_year": {
       "ckan_name": "Latest Year Available",
-      "value": "2018",
+      "value": "2019",
       "type": "string"
     },
     "disabled_views": {
@@ -143,7 +143,7 @@
       "ckan_name": "Default",
       "value": {
         "Town": "Connecticut",
-        "Year": ["2018"],
+        "Year": ["2019"],
         "Measure Type": "Number", 
         "Variable": "Estimated Population"
       },

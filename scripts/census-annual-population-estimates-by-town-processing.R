@@ -17,7 +17,7 @@ raw_location <- grep("raw", sub_folders, value=T)
 path_to_raw_data <- (paste0(getwd(), "/", raw_location))
 data_location <- grep("data$", sub_folders, value=T)
 path_to_data <- (paste0(getwd(), "/", data_location))
-pop_df <- dir(path_to_raw_data, recursive=T, pattern = ".csv")
+pop_df <- dir(path_to_raw_data, recursive=T, pattern = "sub-est2019_9.csv")
 
 pop_est <- read.csv(paste0(path_to_raw_data, "/", pop_df), stringsAsFactors = FALSE, header=T, check.names = F) 
 pop_est_CT <- pop_est %>% filter(STNAME == "Connecticut") %>% select(-c(1:8, 10:12)) 
@@ -40,7 +40,8 @@ pop_est_CT_towns <- ddply(pop_est_CT_towns, "NAME", function(x) colSums(x[c("POP
                                                                             "POPESTIMATE2015",
                                                                             "POPESTIMATE2016",
                                                                             "POPESTIMATE2017",
-                                                                            "POPESTIMATE2018")]))
+                                                                            "POPESTIMATE2018",
+                                                                            "POPESTIMATE2019")]))
 
 #Merge in FIPS
 town_fips_dp_URL <- 'https://raw.githubusercontent.com/CT-Data-Collaborative/ct-town-list/master/datapackage.json'
@@ -50,7 +51,7 @@ fips <- (town_fips_dp$data[[1]])
 pop_est_CT_towns <- merge(pop_est_CT_towns, fips, by.x = "NAME", by.y = "Town", all.y = T)
 
 #Convert wide to long
-pop_est_CT_towns_long <- gather(pop_est_CT_towns, Year, Value, 2:10)
+pop_est_CT_towns_long <- gather(pop_est_CT_towns, Year, Value, 2:11)
 
 #Clean up year column
 pop_est_CT_towns_long$Year <- gsub("POPESTIMATE", "", pop_est_CT_towns_long$Year)
@@ -68,7 +69,7 @@ pop_est_CT_towns_long <- pop_est_CT_towns_long %>%
 # Write to File
 write.table(
   pop_est_CT_towns_long,
-  file.path(path_to_data, "census-population-by-town-2018.csv"),
+  file.path(path_to_data, "census-population-by-town-2019.csv"),
   sep = ",",
   row.names = F
 )
